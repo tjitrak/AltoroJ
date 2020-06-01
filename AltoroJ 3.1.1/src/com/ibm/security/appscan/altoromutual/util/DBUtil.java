@@ -215,8 +215,17 @@ public class DBUtil {
 		
 		Connection connection = getConnection();
 		Statement statement = connection.createStatement();
+	
+	// SQL Injection Vulnerability	
+	//	ResultSet resultSet =statement.executeQuery("SELECT COUNT(*)FROM PEOPLE WHERE USER_ID = '"+ user +"' AND PASSWORD='" + password + "'"); /* BAD - user input should always be sanitized */
 		
-		ResultSet resultSet =statement.executeQuery("SELECT COUNT(*)FROM PEOPLE WHERE USER_ID = '"+ user +"' AND PASSWORD='" + password + "'"); /* BAD - user input should always be sanitized */
+		
+	// Fix
+		String selectSQL = "SELECT COUNT(*)FROM PEOPLE WHERE USER_ID = user = ? AND password = ?";  
+		PreparedStatement preparedStatement = conn.prepareStatement(selectSQL);
+		preparedStatement.setString(1, user);
+		preparedStatement.setString(2, password);
+		resultSet = preparedStatement.executeQuery();
 		
 		if (resultSet.next()){
 			
