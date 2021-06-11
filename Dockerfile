@@ -1,12 +1,10 @@
-----------------
-Dockerfile
-----------------
-# Pull base image
-From tomcat:latest
+FROM clibing/alpine-tomcat:latest
 
-# copy war file on to container
-COPY altoromutual.war /usr/local/tomcat/webapps
-----------------------------------------------------------------
-docker build -t varademo-app .
+ARG TZ='Asia/Bangkok'
 
-docker run -d --name altoroj-demo-app -p 80:8080 altoroj-demo-app
+ENV DEFAULT_TZ ${TZ}
+
+RUN apk -U upgrade 
+ 
+# copy war file on to container 
+COPY home.war /usr/local/tomcat/webapps
