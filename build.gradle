@@ -5,10 +5,6 @@ webAppDirName = 'WebContent'
 sourceCompatibility = "1.7"; 
 targetCompatibility = "1.7";
 
-plugins {
-  id "org.sonarqube" version "3.3"
-}
-
 repositories {
 	mavenCentral()
 }
