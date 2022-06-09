@@ -28,10 +28,10 @@ node {
     }
     
     stage('DAST-Scan-WebApp'){
-        sh 'docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap owasp/zap2docker-stable zap-full-scan.py -t http://192.168.1.210/home/ -r dast-zap-output.html -x ast-zap-output.xml -J ast-zap-output.json || true'
+        sh 'docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap owasp/zap2docker-stable zap-full-scan.py -t https://owasp-juice.shop/ -r dast-zap-output.html -x ast-zap-output.xml -J ast-zap-output.json || true'
     }
     
     stage('DAST-Scan-API'){
-        sh 'docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap owasp/zap2docker-stable zap-api-scan.py -t http://192.168.1.210/home/swagger/properties.json -f openapi -r dast-api-zap-output.html -x ast-zap-output.xml -J ast-zap-output.json || true'
+        sh 'docker run --user root --rm -v $(pwd):/zap/wrk:rw -w /zap owasp/zap2docker-stable zap-api-scan.py -t http://demo.testfire.net/swagger/properties.json  -f openapi -r dast-api-zap-output.html -x ast-zap-output.xml -J ast-zap-output.json || true'
     }
 }
